@@ -1,0 +1,15 @@
+SeccionAntes@<li style="margin: 0px; padding: 0px;background: #841921;border-bottom: 1px solid #efefef;border-right: 1px solid #841921;">
+SeccionDespues@</li>
+SeccionEstiloEnlace@"font: bold 12px Arial, Helvetica, sans-serif;color: #FFCC00;text-decoration: none;display: block;padding: 5px 10px;"
+TituloArticuloAntes@<div style="clear: both;text-align: left;background: #333333;height: 30px;margin:0px;padding:5px;text-align:left;"><h2 Style="font-size: 16px;color: #FFFAD6; margin: 5px;padding:2px;">
+TituloArticuloDespues@</h2></div>
+ContenidoAntes@
+ContenidoDespues@
+EstiloEnlace@style="text-decoration: none;color: #CB4721;"
+MostrarArriba@0
+ArribaAntes@<p style="text-align: right;">
+ArribaDespues@</p>
+ArribaContenido@subir
+ArribaEstiloEnlace@"text-decoration: none;height: 20px;color: #c0c0c0;"
+Tabla@"width: 100%;margin-bottom: 18px;padding: 0;border-collapse: separate;border: 1px solid #ddd;-webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px;"
+Celda@"border-bottom:1px solid #ddd;"

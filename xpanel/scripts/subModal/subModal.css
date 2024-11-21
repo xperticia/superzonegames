@@ -1,0 +1,66 @@
+/**
+ * POPUP CONTAINER STYLES
+ */
+#popupMask {
+	position: absolute;
+	z-index: 200;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	display:none;
+	background: #000;opacity:.75;-moz-opacity: 0.75;filter: alpha(opacity=75);
+}
+#popupContainer {
+	position: absolute;
+	z-index: 201;
+	top: 0px;
+	left: 0px;
+	display:none;
+	padding: 0px;
+}
+#popupInner {
+	border: 1px solid #808080;
+	background-color: #ffffff;
+	-webkit-border-radius: 6px;
+	   -moz-border-radius: 6px;
+			border-radius: 6px;
+	   -webkit-box-shadow: 0 3px 7px rgba(255, 255, 255, 0.6);
+   	      -moz-box-shadow: 0 3px 7px rgba(255, 255, 255, 0.6);
+	           box-shadow: 0 3px 7px rgba(255, 255, 255, 0.6);
+}
+
+#popupFrame {
+	margin: 0px;
+	width: 100%;
+	height: 100%;
+	position: relative;
+	z-index: 202;
+}
+#popupTitleBar {
+	background-color: #333;
+	color: #000000;
+	height: 1.3em;
+	padding: 5px;
+	position: relative;
+	z-index: 203;
+
+	-webkit-border-radius: 6px 6px 0 0;
+	-moz-border-radius: 6px 6px 0 0;
+	border-radius: 6px 6px 0 0;
+}
+#popupTitle {
+	float:left;
+	font-size: 1.1em;
+	color: #ffffbe;
+}
+#popupControls {
+	float: right;
+	cursor: pointer;
+	cursor: hand;
+	margin: -2px 0px;
+}
+#popupControls img {
+	float: left;
+	margin: auto 1px;
+}

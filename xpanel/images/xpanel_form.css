@@ -1,0 +1,171 @@
+html, body {
+	background-color: #fff;
+}
+body {
+	font-family: Tahoma, Geneva, sans-serif;
+	font-size: 12px;
+}
+h1 {
+	font-size: 20px;
+	text-align: center;
+}
+h2 {
+	font-size: 28px;
+	letter-spacing: 5px;
+	text-align: center;
+}
+h3 {
+	font-size: 16px;
+	text-align: center;
+}
+h4 {
+	font-size: 14px;
+	margin: 5px auto;
+	padding-bottom: 5px;
+	text-decoration: underline;
+}
+/*	hoja */
+.imprimible {
+	display: block;
+	width: 19.59cm;
+	min-width: 19.59cm;
+	max-width: 19.59cm;
+	margin: 10px auto;
+}
+table {
+	border: 1px solid #808080;
+	border-collapse: separate;
+	*border-collapse: collapse;
+	-webkit-border-radius: 4px;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+	margin: 0;
+	padding: 0;
+}
+.container > tbody > tr > td {
+	padding: 5px;
+	margin: 0;
+}
+/*	encabezado */
+header {
+	display: block;
+	border-top: 1px solid #808080;
+	border-left: 1px solid #808080;
+	border-right: 1px solid #808080;
+}
+/*	cuerpo */
+section {
+	display: block;
+	border: 1px solid #808080;
+	padding: 5px;
+}
+.tablaCampos {
+	border: 1px solid #808080;
+	border-collapse: separate;
+}
+.tablaCampos tbody > tr > th {
+	text-align: left;
+	padding-left: 10px;
+	vertical-align: top;
+}
+.tablaCampos thead > tr > td,
+.tablaCampos tbody > tr > td,
+.tablaCampos tfoot > tr > td {
+	border: 1px solid #808080;
+	white-space: nowrap;
+}
+.tablaCampos tfoot > tr > th {
+	text-align: right;
+	padding-right: 10px;
+}
+.tablaCampos tfoot > tr > td {
+	text-align: right;
+}
+tbody td span {
+	display: inline-block;
+    overflow: hidden; 
+    white-space: pre-wrap;
+}
+th,td {
+	padding: 2px 5px;
+	font-size: 12px;
+}
+label {
+	vertical-align: top;
+}
+input[type="radio"] {
+	vertical-align: middle;
+	margin: 0;
+	padding: 0;
+}
+/*	pie */
+footer {
+	display: block;
+	border-left: 1px solid #808080;
+	border-bottom: 1px solid #808080;
+	border-right: 1px solid #808080;
+}
+footer table td:first-child {
+	text-align: left;
+	vertical-align: top;
+}
+footer table td:last-child {
+	text-align: right;
+	vertical-align: top;
+}
+/* boton */
+.botones-opciones {
+    top: 0px;
+    right: 15px;
+    padding: 5px;
+    position: fixed;
+    text-align: right;
+}
+.botones-opciones button {
+	font-weight: bold;
+	padding: 2px 12px;
+	font-size: 14px;
+	line-height: 20px;
+	color: #333;
+	display: block;
+	width: 120px;
+	text-align: left;
+}
+.botones-opciones button img {
+	vertical-align: top;
+}
+/*	opciones para impresion */
+@media all {
+   div.saltopagina {
+      display: none;
+   }
+}
+@media print { 
+	div.saltopagina {
+		display:block;
+		page-break-before: always;
+	}
+	.botones-opciones {
+		display: none;
+	}
+	.tablaCampos {
+		border: 1px solid #333;
+	}
+	@page {
+		margin: 0.25cm;
+		padding: 0;
+		font-size: 12px;
+		size: 19.59cm 13.97cm portrait;
+		@top-left {
+			content: "XPERTICIA.com";
+		}
+		@top-right {
+			content: "Página " counter(page);
+		}
+	}
+	body, p, th, td, a {
+		font-size: 12px;
+		padding: 0 5px;
+	}
+	a:after { content: ""; }
+}

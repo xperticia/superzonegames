@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <title>HTML5 2019 05</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Somos la web de referencia con lo mejor en entretenimiento y diversi&oacute;n en consolas, juegos, accesorios y repuestos, donde encontraras novedades, avances, an&aacute;lisis, trucos y mucho m&aacute;s. Adem&aacute;s, brindamos Servicio T&eacute;cnico Especializado."
+    />
+    <meta name="keywords" content="juegos, accesorios, repuestos, novedades,avances, xbox, playstation, ps2, ps3, ps4, nintendo, pc, wii, wiiu, games,trucos" />
+    <meta name="language" content="es" />
+    <meta name="revisit-after" content="1 month" />
+    <meta name="copyright" content="XPERTICIA.com" />
+    <meta name="author" content="Walter E. Irahola" />
+    <meta name="email" content="info@xperticia.com" />
+    <meta name="Distribution" content="Global" />
+    <meta name="Rating" content="General" />
+    <meta name="Robots" content="index,follow" />
+    <link rel="alternate" type="application/rss+xml" title="noticias" href="/html/rss.php" />
+    <link rel="shortcut icon" href="./favicon.ico" />
+    <link rel="image_src" href="{SITIO_URL}logo.jpg" />
+    <link href="{ESTILOCSS}" rel="stylesheet">
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-42212415-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-42212415-1');
+    </script>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <div class="navbar">
+                <div class="navbar-inner">
+                    <div class="container" style="width: auto;">
+                        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </a>
+                        <a class="brand" href="{SITIO_URL}">{SITIO_NOMBRE}</a>
+                        <div class="navbar-text pull-left">{FECHAHORA}</div>
+                        <div class="nav-collapse">
+                            <ul class="nav">
+                                <li><a href="javascript:void(0);" data-toggle="modal" data-backdrop="static" data-target="#ModalMensajes" data-tipo="Consultas" title="Dejar consulta">Cont&aacute;ctanos</a></li>
+                                <li><a href="javascript:void(0);" data-toggle="modal" data-backdrop="static" data-target="#ModalMensajes" data-tipo="Registro" title="Formulario de Registro">Reg&iacute;strate</a></li>
+                            </ul>
+                            {REDES_SOCIALES_HEADER}
+                            <form method="get" action="./" class="navbar-search pull-right">
+                                <input type="hidden" name="menu" value="productos" />
+                                <input type="hidden" name="ca" value="" />
+                                <input type="hidden" name="c" value="" />
+                                <input type="hidden" name="g" value="" />
+                                <input type="text" class="search-query span2" name="q" placeholder="busca tu juego" required />
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {CAROUSEL_HEADER} {SECCIONES_HEADER}
+        </div>
+    </header>
+    <section>
+        <div class="container">
+            <div class="row-fluid">
+                <div class="span12">
+                    {CATEGORIAS} {CONTENIDOS}
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="container">
+            <div class="row-fluid">
+                <div class="span8">
+                    <p>&copy; 2006-
+                        <script>
+                            document.write(new Date().getFullYear());
+                        </script> <strong>{SITIO_NOMBRE}</strong>. Todos los derechos reservados.<br /> Direcci&oacute;n: {SITIO_DIRECCION} - Tel&eacute;fonos: {SITIO_TELEFONO}<br />
+                        <i class="icon-comment icon-white"></i> <a data-toggle="modal" data-backdrop="static" data-target="#ModalMensajes" href="javascript:void(0);" data-tipo="Consultas" title="Dejar consulta">consultas</a> /
+                        <i class="icon-edit icon-white"></i> <a href="./xpanel/" title="XPANEL: sistema de administraci&oacute;n web" target="_blank" rel="noopener noreferrer">xpanel</a> /
+                        <i class="icon-envelope icon-white"></i> <a href="./webmail/" title="Webmail" target="_blank" rel="noopener noreferrer">webmail</a> / Siguenos en {REDES_SOCIALES_FOOTER}
+                    </p>
+                </div>
+                <div class="span2 align-center">
+                    {CONTADOR_VISITAS_FOODER}
+                </div>
+                <div class="span2 align-center">
+                    <a href="http://www.xperticia.com" target="_blank" title="Desarrollado por XPERTICIA.com" rel="noopener noreferrer"><img src="images/xperticia.png" alt="" /></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div id="ModalMensajes" class="modal hide fade modal-large">
+    </div>
+
+    <script src="xpanel/scripts/jquery/jquery.js"></script>
+    <script src="xpanel/scripts/jquery/jquery-ui.js"></script>
+    <script src="xpanel/scripts/bootstrap/js/bootstrap.js"></script>
+    <script src="xpanel/scripts/bootstrap/js/bootstrap-modalmanager.js"></script>
+    <script src="xpanel/scripts/bootstrap/js/bootstrap-modal.js"></script>
+    <script type="text/javascript" src="xsite.js"></script>
+</body>
+
+</html>

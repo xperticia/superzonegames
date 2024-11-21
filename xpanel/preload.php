@@ -1,0 +1,4 @@
+		<div id="hidepage">
+			<div id="fade" style="display: block;position: absolute;top: 0;left: 0;width: 100%;height: 100%;background: #000;z-index:1001;opacity:.75;-moz-opacity: 0.75;filter: alpha(opacity=75);"></div>
+			<div id="light" style="position:absolute;width:250px;height:80px;left:50%;padding: 10px;margin-left:-100px;top:50%;margin-top:-100px;text-align: center;font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 12px;background: #ffffcc;border: 5px solid #900;-webkit-border-radius: 6px 6px;-moz-border-radius: 6px 6px;border-radius: 6px 6px;-webkit-box-shadow: 0 3px 7px rgba(255, 255, 255, 0.6);-moz-box-shadow: 0 3px 7px rgba(255, 255, 255, 0.6);box-shadow: 0 3px 7px rgba(255, 255, 255, 0.6);color: #900;z-index:1002;"><img src="../images/preloader.gif" align="bottom" border="0" alt="" /><br />Cargando pagina...<br />Por favor espere.<br /></div> 
+		</div>

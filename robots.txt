@@ -1,0 +1,9 @@
+User-Agent: *
+Disallow:
+Disallow: /*.css$
+Disallow: /*.js$
+Disallow: /*.txt$
+Disallow: /*archivos/
+Disallow: /html/
+Disallow: /*templates/
+Sitemap: http://www.superzonegames.com/sitemap.xml

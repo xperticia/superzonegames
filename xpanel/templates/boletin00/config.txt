@@ -1,0 +1,13 @@
+SeccionAntes@
+SeccionDespues@
+SeccionEstiloEnlace@
+TituloArticuloAntes@
+TituloArticuloDespues@
+ContenidoAntes@
+ContenidoDespues@
+ContenidoImagenEstilo@
+MostrarArriba@0
+ArribaAntes@
+ArribaDespues@
+ArribaContenido@subir
+ArribaEstiloEnlace@
