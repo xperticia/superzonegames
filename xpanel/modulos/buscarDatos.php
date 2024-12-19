@@ -17,6 +17,46 @@ if(isset($_GET["term"])) {
 $contador = 0;
 
 /* PRODUCTOS */
+if(isset($_GET['t']) && ($_GET['t'] == "obtenerStockSucursalesAsociadas")) {
+
+	$sucursal = $_GET['s'] ?? '';
+	$codigo = trim($_GET['q']) ?? '';
+
+	if (empty($sucursal) || empty($codigo)) {
+		echo json_encode(['error' => 'Parámetros inválidos']);
+	}
+
+	try {
+		$query = "SELECT 
+				sucursales.NOMBRE SUCURSAL,
+				productos.CODIGO,
+				productos.NOMBRE PRODUCTO,
+				STOCK
+			FROM productos
+			LEFT JOIN sucursales ON sucursales.id_sucursal = productos.id_sucursal
+			WHERE 
+				((sucursales.id_sucursal = ?) or (sucursales.id_principal = ?)) 
+				and (productos.codigo = ?)
+			ORDER BY sucursales.NOMBRE
+		";
+		$preparedQuery = $temp->Prepare($query);
+		$registros = $temp->Execute($preparedQuery, [$sucursal,$sucursal,$codigo]);
+		if ($registros) {
+			$resultados = $registros->GetArray();
+			if (!empty($resultados)) {
+				echo json_encode(['message' => 'OK', 'records' => $resultados]);
+			} else {
+				echo json_encode(['message' => 'No se encontraron registros']);
+			}
+		} else {
+			echo json_encode(['error' => 'Error al ejecutar la consulta']);
+		}		
+	} catch (Exception $e) {
+		echo json_encode(['error' => 'Error en la consulta: ' . $e->getMessage()]);
+	}
+
+}
+
 if(isset($_GET['t']) and ($_GET['t'] == "verificarCodigo")) {
 	$query = "SELECT COUNT(codigo) as CANTIDAD,NOMBRE, CATEGORIA FROM productos WHERE (id_sucursal = '".$_GET['s']."') and (codigo = '".trim($_GET['n'])."-".trim($_GET['l'])."') GROUP BY codigo";
 	$registros = $temp->Query($query);

@@ -14,7 +14,7 @@ images/fotos/
 images/productos/
 images/sucursales/
 
-/vendor/
+xpanel/vendor/
 
 /api
 /img

@@ -1450,7 +1450,7 @@ if (verificar_url($PlantillaHTML)) {
 	$contador_visitas_header = "";
 	$registrosContador = $conexion->GetRow("SELECT count(*) as CANTIDAD FROM contador WHERE (id_usuario is null) ORDER BY id_contador DESC LIMIT 1");
 	if ($registrosContador) {
-		$contadorActual = 1637218;
+		$contadorActual = 1843505;
 		$contador_visitas = "\n";
 		$contador_visitas .= "<div class=\"subSeccion\">Contador de Visitas</div>\n";
 		$contador_visitas .= "<ul class=\"pager\">\n";

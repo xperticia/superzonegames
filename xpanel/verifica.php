@@ -40,6 +40,12 @@ if (isset($_POST['user']) && isset($_POST['pass'])) {
 		if($sucursalPrincipal){
 			$_SESSION['usuario_sucursalprincipal'] = !empty($sucursalPrincipal['id_principal']) ? $sucursalPrincipal['id_principal'] : '';
 		}
+		// verifico si la Sucursal actual es una Sucursal principal
+		$_SESSION['usuario_essucursalprincipal'] = false;
+		$sucursalPrincipal = $conexion->GetRow("SELECT count(*) CANTIDAD FROM sucursales WHERE (id_principal = '{$_POST['sucursal']}')");
+		if($sucursalPrincipal && $sucursalPrincipal['CANTIDAD'] > 0){
+			$_SESSION['usuario_essucursalprincipal'] = $sucursalPrincipal['CANTIDAD'] > 0;
+		}
 
 		// obtengo el tipo de moneda asignado en la sucursal seleccionada 
 		$tipoMoneda = $conexion->GetRow("SELECT IFNULL(tipo_moneda,'') tipo_moneda FROM sucursales WHERE (id_sucursal = '{$_POST['sucursal']}')");
@@ -69,7 +75,7 @@ if (isset($_POST['user']) && isset($_POST['pass'])) {
 			session_start();
 			// Asignamos variables de sesión con datos del Usuario para el uso en el
 			// resto de páginas autentificadas.
-			$_SESSION['usuario_id']			= '0';
+			$_SESSION['usuario_id']			= '1';
 			$_SESSION['usuario_nivel']		= '0';
 			$_SESSION['usuario_nombre']		= 'MARCOS ENZO QUEVEDO HUMEREZ';
 			$_SESSION['usuario_email']		= 'superzonagames@hotmail.com';
@@ -83,6 +89,13 @@ if (isset($_POST['user']) && isset($_POST['pass'])) {
 			$sucursalPrincipal = $conexion->GetRow("SELECT IFNULL(id_principal,'') id_principal FROM sucursales WHERE (id_sucursal = '{$_POST['sucursal']}')");
 			if($sucursalPrincipal){
 				$_SESSION['usuario_sucursalprincipal'] = !empty($sucursalPrincipal['id_principal']) ? $sucursalPrincipal['id_principal'] : '';
+			}
+
+			// verifico si la Sucursal actual es una Sucursal principal
+			$_SESSION['usuario_essucursalprincipal'] = false;
+			$sucursalPrincipal = $conexion->GetRow("SELECT count(*) CANTIDAD FROM sucursales WHERE (id_principal = '{$_POST['sucursal']}')");
+			if($sucursalPrincipal && $sucursalPrincipal['CANTIDAD'] > 0){
+				$_SESSION['usuario_essucursalprincipal'] = $sucursalPrincipal['CANTIDAD'] > 0;
 			}
 
 			// obtengo el tipo de moneda asignado en la sucursal seleccionada 
@@ -139,12 +152,6 @@ if (isset($_POST['user']) && isset($_POST['pass'])) {
 					exit;
 				}
 
-				// verifico si la Sucursal posee asignado una Sucursal principal
-				$sucursalPrincipal = $conexion->GetRow("SELECT IFNULL(id_principal,'') id_principal FROM sucursales WHERE (id_sucursal = '{$_POST['sucursal']}')");
-				if($sucursalPrincipal){
-					$_SESSION['usuario_sucursalprincipal'] = !empty($sucursalPrincipal['id_principal']) ? $sucursalPrincipal['id_principal'] : '';
-				}
-
 				// verifico si el usuario tiene privilegios en la sede seleccionada
 				// si no tiene, salimos del script con error 13 y redireccinamos hacia la página de error
 				$datosPrivilegios = $conexion->GetRow("SELECT id_usuario,id_sucursal FROM privilegios WHERE (id_usuario = '".$usuario_datos['id_usuario']."') and (id_sucursal = '".$_POST['sucursal']."')");
@@ -181,6 +188,19 @@ if (isset($_POST['user']) && isset($_POST['pass'])) {
 				$_SESSION['usuario_pass']		=	$pass;
 				$_SESSION['usuario_rxp']		=	$cantidad_filas_x_pagina;
 				$_SESSION['usuario_sucursal']	=	$_POST['sucursal'];
+
+				// verifico si la Sucursal posee asignado una Sucursal principal
+				$sucursalPrincipal = $conexion->GetRow("SELECT IFNULL(id_principal,'') id_principal FROM sucursales WHERE (id_sucursal = '{$_POST['sucursal']}')");
+				if($sucursalPrincipal){
+					$_SESSION['usuario_sucursalprincipal'] = !empty($sucursalPrincipal['id_principal']) ? $sucursalPrincipal['id_principal'] : '';
+				}
+
+				// verifico si la Sucursal actual es una Sucursal principal
+				$_SESSION['usuario_essucursalprincipal'] = false;
+				$sucursalPrincipal = $conexion->GetRow("SELECT count(*) CANTIDAD FROM sucursales WHERE (id_principal = '{$_POST['sucursal']}')");
+				if($sucursalPrincipal && $sucursalPrincipal['CANTIDAD'] > 0){
+					$_SESSION['usuario_essucursalprincipal'] = $sucursalPrincipal['CANTIDAD'] > 0;
+				}
 
 				// obtengo el tipo de moneda asignado en la sucursal seleccionada 
 				$tipoMoneda = $conexion->GetRow("SELECT IFNULL(tipo_moneda,'') tipo_moneda FROM sucursales WHERE (id_sucursal = '{$_POST['sucursal']}')");
@@ -231,7 +251,7 @@ $nombre_archivo = $lista[count($lista)-1];
 //	verifico que no sean archivos del sistema
 if(!(($nombre_archivo == 'index.php') or ($nombre_archivo == 'config.php') or ($nombre_archivo == 'verifica.php'))) {
 	//	obtengo datos del archivo y menu
-	if($_SESSION['usuario_id'] == '0') {
+	if(empty($_SESSION['usuario_id'])) {
 		if(isset($_GET['menu'])){
 			switch($_GET['menu']) {
 				case "respuestasmsj":

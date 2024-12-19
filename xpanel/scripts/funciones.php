@@ -1426,7 +1426,7 @@ function showTable2($conexion,$query,$campos,$claves,$cantidad_filas = 10,$pagin
 			<thead>
 				<tr>
 					<th style="width:15px;vertical-align: top;"><input type="checkbox" id="CheckTodo" name="CheckTodo" /></th>
-					<th style="width: 42px;">&nbsp;</th>
+					<th style="width: <?php echo($_SESSION['usuario_essucursalprincipal'] === true && $_GET['menu'] == "productos" ? '70' : '42') ?>px;">&nbsp;</th>
 					<?php
 						//	muestro los titulos de los campos
 						foreach($campos as $campo=>$titulo) {
@@ -1675,7 +1675,9 @@ function showTable2($conexion,$query,$campos,$claves,$cantidad_filas = 10,$pagin
 							?>
 						<tr class="unChecked <?php echo( isset($record->fields['ACTIVO']) && empty($record->fields['ACTIVO']) ? 'desactived' : ''); ?>">
 							<td><input type="checkbox" id="registro[]" name="registro[]" value="<?php echo($registro); ?>" <?php echo(isset($record->fields['ID_SUCURSAL']) && $record->fields['ID_SUCURSAL'] != $_SESSION['usuario_sucursal'] && $_GET['menu'] == 'ventas' ? 'disabled' : ''); ?> /></td>
-							<?php if($acciones == true) { ?>
+							<?php 
+								if($acciones == true) { 
+									?>
 							<td style="margin: 0;padding: 0px">
 								<div class="btn-toolbar">													 
 									<div class="btn-group">
@@ -1683,10 +1685,27 @@ function showTable2($conexion,$query,$campos,$claves,$cantidad_filas = 10,$pagin
 										<ul class="dropdown-menu">
 											<?php echo($msj); ?>
 										</ul>
+										<?php 
+											if($_SESSION['usuario_essucursalprincipal'] === true && $_GET['menu'] == "productos"){
+												?>
+										<button type="button" class="btn btn-mini" title="Ver Stock de Sucursales asociadas" 
+											data-toggle="modal" data-target="#modalStockCompartido" data-backdrop="static" data-keyboard="true"
+											data-evento="click" 
+											data-metodo="getData_ModalStockSucursalesAsociadas" 
+											data-sucursal="<?php echo($_SESSION['usuario_sucursal']); ?>"
+											data-producto="<?php echo($record->fields['CODIGO']); ?>"
+										>
+											<i class="icon-eye-open"></i>
+										</button>
+												<?php
+											}
+										?>
 									</div>
 								</div>
 							</td>
-							<?php } ?>
+									<?php 
+								} 
+							?>
 							<?php
 								$j = 0;
 								//	muestro el contenido de los campos
@@ -1713,7 +1732,7 @@ function showTable2($conexion,$query,$campos,$claves,$cantidad_filas = 10,$pagin
 										?>
 							</td>
 										<?php
-									} else {	
+									} else {
 										$style_colores = "";
 										if(($type == "I") or ($type == "N") or ($type == "R")) { 
 											if($campo == "ACTIVO") {
@@ -1726,7 +1745,7 @@ function showTable2($conexion,$query,$campos,$claves,$cantidad_filas = 10,$pagin
 											if(strtoupper($record->fields["CATEGORIA_USUARIO"]) == "NUEVO") {
 												$style_colores .= "background: #ff0000;color: #ffff00;";		
 											}
-								}
+										}
 										if(($_GET['menu'] == "productos") and ($campo == "CODIGO")) {
 											if(isset($colores_categoriasProductos)) {
 												for($ic=0; $ic<count($colores_categoriasProductos); $ic++) {

@@ -88,6 +88,34 @@
 					),
 					array("ventasregistradas"=>"Ventas registradas")
 				);
+
+				?>
+				<div id="modalStockCompartido" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					<form style="margin: 0;">
+						<div class="modal-header">
+							<a href="#" class="close" data-dismiss="modal">&times;</a>
+							<h4 id="myModalLabel">Modal Heading</h3>
+						</div>
+						<div class="modal-body">
+							<table class="table table-bordered table-condensed" id="listaProductos">
+								<thead>
+									<tr>
+										<th data-sort="string">Sucursal</th>
+										<th data-sort="string" width="100">C&oacute;digo</th>
+										<th data-sort="string">Producto</th>
+										<th data-sort="int" width="100">Stock</th>
+									</tr>
+								</thead>
+								<tbody>
+								</tbody>
+							</table>
+						</div>
+						<div class="modal-footer">
+							<input type="button" class="btn btn-primary" data-dismiss="modal" aria-hidden="true" value="Cerrar ventana" />
+						</div>
+					</form>
+				</div>
+				<?php
 			}
 
 			// Nuevo
@@ -939,7 +967,7 @@
 				}
 
 				echo("<script type='text/javascript'>");
-				//echo("window.location.href='".$_SERVER['PHP_SELF']."?menu=".$_GET['menu']."';");
+				echo("window.location.href='".$_SERVER['PHP_SELF']."?menu=".$_GET['menu']."';");
 				echo("</script>");
 			}
 

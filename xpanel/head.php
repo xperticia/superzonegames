@@ -18,7 +18,7 @@
 									<ul class="nav">
 										<?php
 											//obtengo las categorias
-											if($_SESSION['usuario_id'] == '0') {
+											if(empty($_SESSION['usuario_id'])) {
 												$registros = $conexion->Execute("SELECT CATEGORIA,URL FROM menu_modulos WHERE categoria <> '' GROUP BY categoria ORDER BY orden");
 											} else {
 												$registros = $conexion->Execute("SELECT * FROM privilegios LEFT JOIN menu_modulos ON menu_modulos.id_menu = privilegios.id_menu WHERE (id_usuario = '".$_SESSION['usuario_id']."') GROUP BY categoria ORDER BY orden");			
@@ -39,7 +39,7 @@
 											<ul class="dropdown-menu">
 													<?php
 													//obtengo los item de cada categoria
-													if($_SESSION['usuario_id'] == '0') {
+													if(empty($_SESSION['usuario_id'])) {
 														$registros2 = $temp->Execute("SELECT * FROM menu_modulos WHERE (categoria = '".$registros->fields["CATEGORIA"]."') ORDER BY orden");
 													} else {
 														$registros2 = $temp->Execute("SELECT * FROM privilegios LEFT JOIN menu_modulos ON (menu_modulos.id_menu = privilegios.id_menu) or ((menu_modulos.nombre_menu = 'Divisor') and (menu_modulos.url = '-')) WHERE (id_usuario = '".$_SESSION['usuario_id']."') and (categoria = '".$registros->fields["CATEGORIA"]."') GROUP BY orden ORDER BY orden");

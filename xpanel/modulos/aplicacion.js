@@ -4186,20 +4186,34 @@ document.addEventListener('DOMContentLoaded', function () {
 function handleClick(event) {
     //console.log('handleClick',event.target);
 
+	/*
     if ((event.target.getAttribute('data-evento') == 'click') && (event.target.getAttribute('data-metodo') != '')) {
         const parametro = event.target.getAttribute('data-parametro') ? event.target.getAttribute('data-parametro') : ''
         const metodos = event.target.getAttribute("data-metodo").split(",")
+		
         metodos.forEach((nombreMetodo) => {
             if (typeof window[nombreMetodo] === 'function') {
                 window[nombreMetodo](event.target.innerText, parametro, event.target);
             }
         })
     }
+		*/
 
     const target = event.target.nodeName == 'BUTTON' ? event.target : (event.target.nodeName == 'A' ? event.target : event.target.closest('BUTTON'))
 
     if (!target) { return }
     if (target.disabled) { return }
+
+    if ((target.getAttribute('data-evento') == 'click') && (target.getAttribute('data-metodo') != '')) {
+        const parametro = target.getAttribute('data-parametro') ? target.getAttribute('data-parametro') : ''
+        const metodos = target.getAttribute("data-metodo").split(",")
+		
+        metodos.forEach((nombreMetodo) => {
+            if (typeof window[nombreMetodo] === 'function') {
+                window[nombreMetodo](target.innerText, parametro, target);
+            }
+        })
+    }
 
 	if (target.id == 'btnModalGuardarDetalleTraspaso') {
         event.preventDefault()
@@ -4265,6 +4279,7 @@ function handleClick(event) {
 	
 		}
 	}
+
 	if(target.id == 'btnEliminarDetalle'){
         event.preventDefault()
 		const formRegistro = target.closest('form')
@@ -4420,6 +4435,48 @@ function handleDblClick(event) {
     const target = event.target
 
     if (!target) return
+
+}
+
+// BUSCADOR STOCK EN OTRAS SUCURSALES DE UN PRODUCTO ----------
+function getData_ModalStockSucursalesAsociadas(valorSeleccionado, master, objeto) {
+
+	const titulo = objeto.getAttribute('title')
+	const sucursal = objeto.getAttribute('data-sucursal')
+	const codigo = objeto.getAttribute('data-producto')
+	
+	let vParametros = ''
+	vParametros = vParametros + '&s='+sucursal
+	vParametros = vParametros + '&q='+codigo
+
+	fetch('buscarDatos.php?t=obtenerStockSucursalesAsociadas'+vParametros, { method: 'GET' })
+		.then(response => response.json())
+		.then(result => {
+
+			const domModal = app.querySelector(objeto.getAttribute('data-target'))
+
+			domModal.querySelector('.modal-header h4').innerText = titulo
+			//domModal.querySelector('.modal-body').style.height = '350px'
+			domModal.style.width = '830px'
+					
+			const body = domModal.querySelector('.modal-body table tbody')
+			body.innerHTML = ''
+
+			if(result[0].message == 'OK'){
+				result[0].records.forEach(item => {
+					body.innerHTML += `<tr>
+						<td>${item.SUCURSAL}</td>
+						<td>${item.CODIGO}</td>
+						<td>${item.PRODUCTO}</td>
+						<td class="text-right">${item.STOCK}</td>
+					</tr>`	
+				})
+			} else {
+				body.innerHTML = `<tr><td colspan="4">${result[0].error}</td></tr>`
+			}
+		
+		})
+		.catch(error => console.log('Hubo un problema con la petición Fetch: ' + error.message))
 
 }
 
