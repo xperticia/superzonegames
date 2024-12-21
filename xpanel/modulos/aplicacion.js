@@ -4464,7 +4464,7 @@ function getData_ModalStockSucursalesAsociadas(valorSeleccionado, master, objeto
 
 			if(result[0].message == 'OK'){
 				result[0].records.forEach(item => {
-					body.innerHTML += `<tr>
+					body.innerHTML += `<tr ${item.ID_SUCURSAL == sucursal ? 'class="info"' : ''}>
 						<td>${item.SUCURSAL}</td>
 						<td>${item.CODIGO}</td>
 						<td>${item.PRODUCTO}</td>

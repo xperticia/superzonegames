@@ -40,9 +40,9 @@ if (isset($_POST['user']) && isset($_POST['pass'])) {
 		if($sucursalPrincipal){
 			$_SESSION['usuario_sucursalprincipal'] = !empty($sucursalPrincipal['id_principal']) ? $sucursalPrincipal['id_principal'] : '';
 		}
-		// verifico si la Sucursal actual es una Sucursal principal
+		// verifico si la Sucursal actual es una Sucursal principal o forma parte de una sucursal principal
 		$_SESSION['usuario_essucursalprincipal'] = false;
-		$sucursalPrincipal = $conexion->GetRow("SELECT count(*) CANTIDAD FROM sucursales WHERE (id_principal = '{$_POST['sucursal']}')");
+		$sucursalPrincipal = $conexion->GetRow("SELECT count(*) CANTIDAD FROM sucursales WHERE (id_principal = '{$_POST['sucursal']}') or ((id_sucursal = '{$_POST['sucursal']}') and (id_principal is not null))");
 		if($sucursalPrincipal && $sucursalPrincipal['CANTIDAD'] > 0){
 			$_SESSION['usuario_essucursalprincipal'] = $sucursalPrincipal['CANTIDAD'] > 0;
 		}
@@ -91,9 +91,9 @@ if (isset($_POST['user']) && isset($_POST['pass'])) {
 				$_SESSION['usuario_sucursalprincipal'] = !empty($sucursalPrincipal['id_principal']) ? $sucursalPrincipal['id_principal'] : '';
 			}
 
-			// verifico si la Sucursal actual es una Sucursal principal
+			// verifico si la Sucursal actual es una Sucursal principal o forma parte de una sucursal principal
 			$_SESSION['usuario_essucursalprincipal'] = false;
-			$sucursalPrincipal = $conexion->GetRow("SELECT count(*) CANTIDAD FROM sucursales WHERE (id_principal = '{$_POST['sucursal']}')");
+			$sucursalPrincipal = $conexion->GetRow("SELECT count(*) CANTIDAD FROM sucursales WHERE (id_principal = '{$_POST['sucursal']}') or ((id_sucursal = '{$_POST['sucursal']}') and (id_principal is not null))");
 			if($sucursalPrincipal && $sucursalPrincipal['CANTIDAD'] > 0){
 				$_SESSION['usuario_essucursalprincipal'] = $sucursalPrincipal['CANTIDAD'] > 0;
 			}
@@ -195,9 +195,9 @@ if (isset($_POST['user']) && isset($_POST['pass'])) {
 					$_SESSION['usuario_sucursalprincipal'] = !empty($sucursalPrincipal['id_principal']) ? $sucursalPrincipal['id_principal'] : '';
 				}
 
-				// verifico si la Sucursal actual es una Sucursal principal
+				// verifico si la Sucursal actual es una Sucursal principal o forma parte de una sucursal principal
 				$_SESSION['usuario_essucursalprincipal'] = false;
-				$sucursalPrincipal = $conexion->GetRow("SELECT count(*) CANTIDAD FROM sucursales WHERE (id_principal = '{$_POST['sucursal']}')");
+				$sucursalPrincipal = $conexion->GetRow("SELECT count(*) CANTIDAD FROM sucursales WHERE (id_principal = '{$_POST['sucursal']}') or ((id_sucursal = '{$_POST['sucursal']}') and (id_principal is not null))");
 				if($sucursalPrincipal && $sucursalPrincipal['CANTIDAD'] > 0){
 					$_SESSION['usuario_essucursalprincipal'] = $sucursalPrincipal['CANTIDAD'] > 0;
 				}

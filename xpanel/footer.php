@@ -100,5 +100,5 @@
             }
         }
     ?>
-	<script type="text/javascript" src="aplicacion.js?v=03082023"></script>
+	<script type="text/javascript" src="aplicacion.js?v=21122024"></script>
 	<script type="module" src="app.js"></script>

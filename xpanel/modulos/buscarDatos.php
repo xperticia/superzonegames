@@ -27,7 +27,7 @@ if(isset($_GET['t']) && ($_GET['t'] == "obtenerStockSucursalesAsociadas")) {
 	}
 
 	try {
-		$query = "SELECT 
+		$queryBK = "SELECT 
 				sucursales.NOMBRE SUCURSAL,
 				productos.CODIGO,
 				productos.NOMBRE PRODUCTO,
@@ -39,8 +39,43 @@ if(isset($_GET['t']) && ($_GET['t'] == "obtenerStockSucursalesAsociadas")) {
 				and (productos.codigo = ?)
 			ORDER BY sucursales.NOMBRE
 		";
+		$query = "SELECT 
+				s.ID_SUCURSAL,
+				s.NOMBRE SUCURSAL,
+				productos.CODIGO,
+				productos.NOMBRE PRODUCTO,
+				STOCK
+			FROM productos
+			LEFT JOIN (
+				SELECT ID_SUCURSAL,NOMBRE,ID_PRINCIPAL 
+				FROM sucursales 
+				WHERE id_sucursal = ?
+
+				UNION ALL
+
+				SELECT ID_SUCURSAL,NOMBRE,ID_PRINCIPAL 
+				FROM sucursales 
+				WHERE id_principal = (select ID_PRINCIPAL from sucursales s where s.ID_SUCURSAL = ?) and ID_SUCURSAL != ?
+
+				UNION ALL
+
+				SELECT ID_SUCURSAL,NOMBRE,ID_PRINCIPAL 
+				FROM sucursales 
+				WHERE id_sucursal = (select ID_PRINCIPAL from sucursales s where s.ID_SUCURSAL = ?) and ID_SUCURSAL != ?
+
+				UNION ALL
+
+				SELECT ID_SUCURSAL,NOMBRE,ID_PRINCIPAL 
+				FROM sucursales 
+				WHERE ID_PRINCIPAL = ?
+
+			) s ON s.ID_SUCURSAL = productos.id_sucursal
+			WHERE 
+				(productos.codigo = ?) and s.ID_SUCURSAL is not null
+			ORDER BY s.NOMBRE
+		";
 		$preparedQuery = $temp->Prepare($query);
-		$registros = $temp->Execute($preparedQuery, [$sucursal,$sucursal,$codigo]);
+		$registros = $temp->Execute($preparedQuery, [$sucursal,$sucursal,$sucursal,$sucursal,$sucursal,$sucursal,$codigo]);
 		if ($registros) {
 			$resultados = $registros->GetArray();
 			if (!empty($resultados)) {
